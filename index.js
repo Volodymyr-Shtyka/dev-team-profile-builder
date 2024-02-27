@@ -1,3 +1,4 @@
+// Importing required modules and classes
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
@@ -5,14 +6,19 @@ const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 
+// Define the output directory path
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 
+// Import the render function from the page-template module
 const render = require("./src/page-template.js");
 
+// Array to store team members
 const teamMembers = [];
 
+// Function to gather information about the team members
 async function gatherTeamInfo() {
     console.log("Please enter information for the team manager:");
+    // Prompt user for manager information
     const managerInfo = await inquirer.prompt([
         {
             type: "input",
@@ -36,10 +42,12 @@ async function gatherTeamInfo() {
         }
     ]);
 
+    // Create Manager object and add it to the team members array
     const manager = new Manager(managerInfo.name, managerInfo.id, managerInfo.email, managerInfo.officeNumber);
     teamMembers.push(manager);
 
     let addAnother = true;
+    // Loop to add additional team members
     while (addAnother) {
         const {choice} = await inquirer.prompt({
             type: "list",
@@ -48,6 +56,7 @@ async function gatherTeamInfo() {
             choices: ["Add an engineer", "Add an intern", "Finish building the team"]
         });
 
+        // Switch case to handle user choices
         switch (choice) {
             case "Add an engineer":
                 await addEngineer();
@@ -61,6 +70,7 @@ async function gatherTeamInfo() {
         }
     }
 
+    // Generate team HTML file
     const timestamp = Date.now();
     const fileName = `team-${timestamp}.html`;
     const outputPath = path.join(OUTPUT_DIR, fileName);
@@ -69,6 +79,7 @@ async function gatherTeamInfo() {
     console.log(`Team HTML file generated at ${outputPath}`);
 }
 
+// Function to prompt user for engineer information
 async function addEngineer() {
     console.log("Please enter information for the engineer:");
 
@@ -95,10 +106,12 @@ async function addEngineer() {
         }
     ]);
 
+    // Create Engineer object and add it to the team members array
     const engineer = new Engineer(engineerInfo.name, engineerInfo.id, engineerInfo.email, engineerInfo.github);
     teamMembers.push(engineer);
 }
 
+// Function to prompt user for intern information
 async function addIntern() {
     console.log("Please enter information for the intern:");
 
@@ -125,8 +138,10 @@ async function addIntern() {
         }
     ]);
 
+    // Create Intern object and add it to the team members array
     const intern = new Intern(internInfo.name, internInfo.id, internInfo.email, internInfo.school);
     teamMembers.push(intern);
 }
 
+// Call the gatherTeamInfo function to start the process of gathering team information
 gatherTeamInfo();
