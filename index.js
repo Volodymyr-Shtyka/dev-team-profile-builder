@@ -13,6 +13,8 @@ const render = require("./src/page-template.js");
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
 
+const teamMembers = [];
+
 async function gatherTeamInfo() {
     console.log("Please enter information for the team manager:");
     const managerInfo = await inquirer.prompt([
@@ -37,6 +39,16 @@ async function gatherTeamInfo() {
             message: "Enter the team manager's office number:"
         }
     ]);
+
+    const manager = new Manager(managerInfo.name, managerInfo.id, managerInfo.email, managerInfo.officeNumber);
+    teamMembers.push(manager);
+
+    const timestamp = Date.now();
+    const fileName = `team-${timestamp}.html`;
+    const outputPath = path.join(OUTPUT_DIR, fileName);
+    const htmlContent = render(teamMembers);
+    fs.writeFileSync(outputPath, htmlContent);
+    console.log(`Team HTML file generated at ${outputPath}`);
 }
 
 gatherTeamInfo();
