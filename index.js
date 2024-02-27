@@ -43,12 +43,42 @@ async function gatherTeamInfo() {
     const manager = new Manager(managerInfo.name, managerInfo.id, managerInfo.email, managerInfo.officeNumber);
     teamMembers.push(manager);
 
+    let addAnother = true;
+    while (addAnother) {
+        const {choice} = await inquirer.prompt({
+            type: "list",
+            name: "choice",
+            message: "What would you like to do next?",
+            choices: ["Add an engineer", "Add an intern", "Finish building the team"]
+        });
+
+        switch (choice) {
+            case "Add an engineer":
+                await addEngineer();
+                break;
+            case "Add an intern":
+                await addIntern();
+                break;
+            case "Finish building the team":
+                addAnother = false;
+                break;
+        }
+    }
+
     const timestamp = Date.now();
     const fileName = `team-${timestamp}.html`;
     const outputPath = path.join(OUTPUT_DIR, fileName);
     const htmlContent = render(teamMembers);
     fs.writeFileSync(outputPath, htmlContent);
     console.log(`Team HTML file generated at ${outputPath}`);
+}
+
+async function addEngineer() {
+    console.log("Please enter information for the engineer:");
+}
+
+async function addIntern() {
+    console.log("Please enter information for the intern:");
 }
 
 gatherTeamInfo();
