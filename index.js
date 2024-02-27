@@ -13,3 +13,30 @@ const render = require("./src/page-template.js");
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
 
+async function gatherTeamInfo() {
+    console.log("Please enter information for the team manager:");
+    const managerInfo = await inquirer.prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "Enter the team manager's name:"
+        },
+        {
+            type: "input",
+            name: "id",
+            message: "Enter the team manager's employee ID:"
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "Enter the team manager's email address:"
+        },
+        {
+            type: "input",
+            name: "officeNumber",
+            message: "Enter the team manager's office number:"
+        }
+    ]);
+}
+
+gatherTeamInfo();
