@@ -98,6 +98,9 @@ async function addEngineer() {
             message: "Enter the engineer's GitHub username:"
         }
     ]);
+
+    const engineer = new Engineer(engineerInfo.name, engineerInfo.id, engineerInfo.email, engineerInfo.github);
+    teamMembers.push(engineer);
 }
 
 async function addIntern() {
@@ -125,6 +128,9 @@ async function addIntern() {
             message: "Enter the intern's school:"
         }
     ]);
+
+    const intern = new Intern(internInfo.name, internInfo.id, internInfo.email, internInfo.school);
+    teamMembers.push(intern);
 }
 
 gatherTeamInfo();
