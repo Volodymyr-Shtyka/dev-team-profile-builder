@@ -76,6 +76,10 @@ npm test
 
 Ensure that all tests pass before making any changes to the project code to maintain its functionality and reliability.
 
+## Deployed Application
+
+Access the deployed application and an example of the generated HTML file [here](https://volodymyr-shtyka.github.io/dev-team-profile-builder/output/team-1709070497750.html).
+
 ## Questions
 
 If you have any questions or need further assistance with the Dev Team Profile Builder, please feel free to contact the
