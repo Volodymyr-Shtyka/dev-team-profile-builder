@@ -75,10 +75,56 @@ async function gatherTeamInfo() {
 
 async function addEngineer() {
     console.log("Please enter information for the engineer:");
+
+    const engineerInfo = await inquirer.prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "Enter the engineer's name:"
+        },
+        {
+            type: "input",
+            name: "id",
+            message: "Enter the engineer's employee ID:"
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "Enter the engineer's email address:"
+        },
+        {
+            type: "input",
+            name: "github",
+            message: "Enter the engineer's GitHub username:"
+        }
+    ]);
 }
 
 async function addIntern() {
     console.log("Please enter information for the intern:");
+
+    const internInfo = await inquirer.prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "Enter the intern's name:"
+        },
+        {
+            type: "input",
+            name: "id",
+            message: "Enter the intern's employee ID:"
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "Enter the intern's email address:"
+        },
+        {
+            type: "input",
+            name: "school",
+            message: "Enter the intern's school:"
+        }
+    ]);
 }
 
 gatherTeamInfo();
